@@ -1,0 +1,8 @@
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\bin\Debug\DAL.dll
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\bin\Debug\DAL.pdb
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\bin\Debug\Entities.dll
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\bin\Debug\Entities.pdb
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\obj\Debug\DAL.csproj.CopyComplete
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\obj\Debug\DAL.dll
+C:\Users\Abdullah\source\repos\Ead_Assignment\DAL\obj\Debug\DAL.pdb
