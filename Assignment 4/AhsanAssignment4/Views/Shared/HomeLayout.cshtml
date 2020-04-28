@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HomeLayout</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css1")
+    @RenderSection("scripts", false);
+</head>
+<body>
+   
+    @RenderBody();
+
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Content("~/User/home")">My Drive</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="@Url.Content("~/User/home")">Home</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    @RenderSection("sec1", false);
+
+    <div class="container-fluid">
+        <button type="button" class="btn" id="btn" data-toggle="modal" data-target="#myModal">
+            CREATE FOLDER
+        </button>
+
+        <div class="modal modal-class" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <span><b>MY DRIVE</b></span>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <div class="modal-body mb">
+                        <b><span style="color: black; ">ENTER YOUR FOLDER NAME</span></b>
+                        <div>
+                            <input type="text" name="child" class="input" id="inp">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn1" name="createbtn" id="create-folder">CREATE FOLDER</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    @RenderSection("sec2", false);
+    @RenderSection("sec3", false);
+
+    <div class="folders-div">
+
+
+    </div>
+</body>
+</html>

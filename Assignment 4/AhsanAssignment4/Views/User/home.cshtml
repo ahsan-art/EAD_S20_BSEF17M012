@@ -1,0 +1,156 @@
+﻿
+@{
+     Layout = "~/Views/Shared/HomeLayout.cshtml";
+    ViewBag.Title = "home";
+}
+
+
+ @section scripts{
+     <script>
+         var token = "@TempData["token"]";
+         token = token.slice(8);
+         token = token.slice(0, -1).trim();
+         console.log(token);
+         let folderId = 0;
+         let flag = true;
+         var basePath = "https://localhost:44369/";
+         $(document).ready(function () {
+             var data = new FormData();
+            data.append("fid", 0);
+             var settings = {
+                 type: "POST",
+                 url: basePath + "api/Values/GetFolders",
+                 contentType: false,
+                 processData: false,
+                 headers: { "Authorization": 'Bearer ' + token },
+                 data: data,
+                 success: function (response) {
+                     let mdiv = $("<div></div>");
+                       mdiv.addClass("sdiv");
+                     for (let i = 0; i < response.folders.length; i++) {
+                         let div = $("<div></div").addClass("innerDivs");
+                         div.attr("fid",  response.folders[i].folderId);
+                         div.text(response.folders[i].folderName);
+                         mdiv.append(div);
+                     }
+                     $(".folders-div").append(mdiv);
+                 },
+                 error: function (error) {
+                     alert("error occured");
+                 }
+             };
+            $.ajax(settings);
+         });
+     </script>
+     
+     }
+
+@section sec1{
+    <script>
+        $(document).ready(function () {
+
+            $("#create-folder").on("click", function () {
+                let folderName = $("#inp").val();
+                alert(folderId);
+                var data1 = new FormData();
+                data1.append("fname", folderName);
+                data1.append("fid", folderId);
+                var settings = {
+                    type: "POST",
+                    url: basePath+"api/Values/FolderCreation",
+                    contentType: false,
+                    processData: false,
+                    headers: { "Authorization": 'Bearer ' + token },
+                    data: data1,
+                    success: function (response) {
+                        if (response.success) {
+
+                            let div = $("<div></div>").addClass("innerDivs");
+                            div.attr("fid", response.folderId);
+                            div.text(folderName);
+                             $(".folders-div .sdiv").append(div);
+                        }
+                    },
+                    error: function (e) {
+                        alert(e);
+                    }
+                };
+                $.ajax(settings);
+             
+
+            });
+
+        });
+
+            $(document).ready(function() {
+              $(".modal").on("hidden.bs.modal", function() {
+                $("#inp").val("");
+              });
+            });
+
+    </script>
+    
+    }
+
+
+@section sec2{
+    <script>
+        $(document).ready(function () {
+            $(".folders-div").on("dblclick", ".innerDivs", function () {
+                let fid = $(this).attr("fid");
+                folderId = fid;
+                let fdata = new FormData();
+                fdata.append("fid", fid);
+                 var settings = {
+                    type: "POST",
+                    url: basePath+"api/Values/GetFolders",
+                    contentType: false,
+                    processData: false,
+                    headers: { "Authorization": 'Bearer ' + token },
+                    data: fdata,
+                    success: function (response) {
+                        let mdiv = $("<div></div>");
+                        mdiv.addClass("sdiv");
+                        for (let i = 0; i < response.folders.length; i++) {
+                            let div = $("<div></div").addClass("innerDivs");
+                            div.attr("fid", response.folders[i].folderId);
+                            div.text(response.folders[i].folderName);
+                            mdiv.append(div);
+                        }
+                        $(".folders-div").append(mdiv);
+                        $(".folders-div").children().not(':last').remove();
+                        $(".folders-div div div").addClass("innerDivs"); 
+                    },
+                    error: function (e) {
+                        alert(e);
+                    }
+                };
+                $.ajax(settings);
+            });
+
+        });
+
+    </script>
+    
+    }
+
+
+@section sec3{
+    <script>
+        $(document).ready(function () {
+            $(".folders-div").on("click", ".innerDivs", function () {
+                if (flag) {
+                    $(this).closest(".folders-div").find(".sc").css("border", "0px");
+                    $(this).css("border", "4px solid red").addClass("sc");
+                    flag = false;
+                }
+                else {
+                    $(this).css("border", "0px")
+                    flag = true;
+                }
+            });
+        });
+
+    </script>
+    
+    }
